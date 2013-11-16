@@ -1,0 +1,30 @@
+
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet kf "simple kernel functions ()"
+${1:kernelFunction}<<<${2:nBlocks}, ${3:nThreadsPerBlock}>>>(${0:params});
+endsnippet
+
+snippet kf "kernel functions with condtions (it's not ready yet)"
+if (${2:size} < ${3:nMaxThreadPerBlock} * ${4:nMaxBlocks}) {
+	${1:kernelFunction}<<<$2 / $3, $3>>>(${0:params});
+}
+endsnippet
+
+snippet gf "global function ()" b
+__global__ void ${1:globalFunc}(${2:arguments})
+{
+	${0:/* some code */}
+}
+endsnippet
+
+
+snippet df "device function ()" b
+__device__ ${3:void} ${1:deviceFunction}(${2:arguments})
+{
+	${0:/* some code */}
+}
+endsnippet
+# vim:ft=snippets:

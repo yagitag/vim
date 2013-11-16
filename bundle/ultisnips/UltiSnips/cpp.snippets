@@ -1,0 +1,163 @@
+extends c
+
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+global !p
+
+def transformToVarFormat(str):
+	if str == '':
+		return str
+	return str[0].lower() + str[1:]
+
+def transformToClassFormat(str):
+	if str == '':
+		return 'ClassName'
+	import re
+	tmp = re.sub('_([a-z])', lambda pat: pat.group(1).upper(), str)
+	tmp = tmp[0].upper() + tmp[1:]
+	return tmp
+
+def parseArguments(args):
+	if not args:
+		return [[''],['/* code */ ']]
+	doubleWords = args.split(',')
+	import re
+	words = [[],[]]
+	for doubleWord in doubleWords:
+		doubleWord = doubleWord.strip()
+		splitDoubleWord = re.split('\s+', doubleWord)
+		arrLen = len(splitDoubleWord)
+		if arrLen >= 2:
+			typeArg = splitDoubleWord[0]
+			for i in range(1, arrLen-1):
+				typeArg += ' ' + splitDoubleWord[i]
+			words[0].append(typeArg)
+			words[1].append(splitDoubleWord[arrLen-1])
+		else:
+			words[0].append('')
+			words[1].append('/* error */')
+	return words
+
+endglobal
+
+snippet beginend "$1.begin(), $1.end() (beginend)"
+${1:v}${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}begin(), $1${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}end()
+endsnippet
+
+
+snippet cl "class .. (class)"
+class ${1:`!p snip.rv = transformToClassFormat(snip.basename)`}
+{
+	public:
+		$1(${2});
+		virtual ~$1();
+
+	private:
+		${0:/* some code */}
+};
+endsnippet
+
+snippet cl "class with autodef private var (class)"
+class ${1:`!p snip.rv = transformToClassFormat(snip.basename)`}
+{
+	public:
+		$1(${2:arguments});
+		virtual ~$1();
+
+	private:
+${0:`!p
+args = parseArguments(t[2])
+snip.rv = ''
+for i in range(0, len(args[0])):
+	if args[0][i]:
+		if args[1][i][0] == '*':
+			args[1][i] = args[1][i][1:]
+		snip.rv += '    ' + args[0][i] + ' _' + args[1][i] + ';\n'
+	else:
+		snip.rv += '    ' + args[1][i] + '\n'`}};
+endsnippet
+
+snippet clc "class constructor .. "
+${1:`!p snip.rv = transformToClassFormat(snip.basename)`}::$1(${2:arguments})
+{
+${0:`!p
+args = parseArguments(t[2])
+snip.rv = ''
+for i in range(0, len(args[0])):
+	if args[0][i]:
+		if args[1][i][0] == '*':
+			args[1][i] = args[1][i][1:]
+		snip.rv += '  _' + args[1][i] + ' = ' + args[1][i] + ';\n'
+	else:
+		snip.rv += ' ' + args[1][i] + '\n'`}}
+endsnippet
+
+snippet cld "class destructor .. "
+${1:`!p snip.rv = transformToClassFormat(snip.basename)`}::~$1()
+{
+	${0:/* code */}
+}
+endsnippet
+
+snippet clf "class function .. "
+${4:void} ${1:`!p snip.rv = transformToClassFormat(snip.basename)`}::${2:functionName}(${3:arguments})
+{
+	${0:/* code */}
+}
+endsnippet
+
+snippet clg "class getter .."
+${3:int} ${1:`!p snip.rv = transformToClassFormat(snip.basename)`}::get${2:SomeValue}()
+{
+	return _`!p snip.rv = transformToVarFormat(t[2])`;
+}
+endsnippet
+
+snippet cls "class setter .."
+void ${1:`!p snip.rv = transformToClassFormat(snip.basename)`}::set${2:SomeValue}(${3:int} `!p snip.rv = transformToVarFormat(t[2])`)
+{
+	_`!p
+someValue = transformToVarFormat(t[2])
+snip.rv = someValue + ' = ' + someValue`;
+}
+endsnippet
+
+snippet ns "namespace .. (namespace)"
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+{
+	${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+}${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
+endsnippet
+
+snippet readfile "read file (readF)"
+std::vector<char> v;
+if (FILE *fp = fopen(${1:"filename"}, "r")) {
+	char buf[1024];
+	while(size_t len = fread(buf, 1, sizeof(buf), fp))
+		v.insert(v.end(), buf, buf + len);
+	fclose(fp);
+}
+endsnippet
+
+snippet map "std::map (map)"
+${3:std}::map<${1:key}, ${2:value}> ${0:map};
+endsnippet
+
+snippet vector "std::vector (v)"
+${2:std::}vector<${1:char}> ${0:v};
+endsnippet
+
+snippet tp "template <typename ..> (template)"
+template <typename ${1:_InputIter}>
+endsnippet
+
+snippet ifndef "#ifndef .. #define .. #endif" ! 
+#ifndef ${1:__`!p snip.rv = snip.basename.upper() or "SOMETHIGNG"`_H__}
+#define $1
+${0}
+#endif // $1
+endsnippet
+
+# vim:ft=snippets:
