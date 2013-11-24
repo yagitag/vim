@@ -24,6 +24,8 @@ LuciusWhite
 let g:UltiSnipsExpandTrigger="<C-j>"
 
 "syntastic settings
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
 "let g:pymode_lint_write=0
 
 set keymap=russian-jcukenwin " подключение встроенной русской раскладки

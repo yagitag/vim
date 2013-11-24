@@ -3,6 +3,21 @@ extends texmath
 ###########################################################################
 #                             LATEX SNIPPETS                              #
 ###########################################################################
+snippet initialization "include my standard package" !b
+\documentclass[12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{multicol,multirow}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[height=24cm,a4paper,hmargin={3.1cm,3.1cm}]{geometry}
+
+\begin{document}
+${0:%text}
+\end{document}
+endsnippet
 
 snippet r "\\ref{}" w
 \ref{$1}
