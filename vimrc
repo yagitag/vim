@@ -23,14 +23,13 @@ colorscheme new_lucius
 let g:UltiSnipsExpandTrigger="<C-j>"
 
 "syntastic settings
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_signs=0
-"let g:pymode_lint_write=0
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
 
 set keymap=russian-jcukenwin " подключение встроенной русской раскладки
 set iminsert=0 " русская расскладка по умолчанию
-set imsearch=0 " русская расскладка при поиске по умолчанию 
+set imsearch=0 " русская расскладка при поиске по умолчанию
 
 set number " нумерация
 set cursorline "подсветка редактируемой строчки
