@@ -11,7 +11,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
+let g:ycm_register_as_syntastic_checker = 0
 filetype plugin indent on
 
 "colorscheme settings
