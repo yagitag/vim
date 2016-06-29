@@ -6,14 +6,15 @@ filetype plugin on
 
 "vundle settings
 filetype off "required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+call vundle#end()
 filetype plugin indent on
 
 "colorscheme settings
@@ -47,3 +48,9 @@ set showcmd " показывать выполняемую команду
 match ExtraWhitespace /\s\+$/ " показывать пробелы в конце строки
 
 au BufNewFile,BufRead *.cu set ft=cpp.cu
+
+ca dfn YcmCompleter GoToDefinition
+ca dcl YcmCompleter GoToDeclaration
+nnoremap <C-f> :YcmCompleter GoTo<CR>
+
+set colorcolumn=80
