@@ -6,29 +6,30 @@ filetype plugin on
 
 "vundle settings
 filetype off "required!
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
-call vundle#end()
+
+"ultisnips settings
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:UltiSnipsEditSplit="vertical"
 filetype plugin indent on
 
 "colorscheme settings
 set t_Co=256
 syntax enable
-colorscheme new_lucius
-
-"ultisnips settings
-let g:UltiSnipsExpandTrigger="<C-j>"
-
-"syntastic settings
-let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': [] }
+colorscheme lucius
+LuciusDark
 
 set keymap=russian-jcukenwin " подключение встроенной русской раскладки
 set iminsert=0 " русская расскладка по умолчанию
