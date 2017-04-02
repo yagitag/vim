@@ -1,6 +1,3 @@
-call pathogen#infect()
-
-
 set nocp
 filetype plugin on
 
@@ -14,8 +11,8 @@ Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_register_as_syntastic_checker = 0
 
 "ultisnips settings
 let g:UltiSnipsUsePythonVersion = 3
