@@ -9,6 +9,7 @@ Bundle 'gmarik/vundle'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
+Bundle 'lyokha/vim-xkbswitch'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -22,6 +23,14 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
 filetype plugin indent on
 
+"xkbswitch settings
+"depends on https://github.com/ierton/xkb-switch. lib path pass through XkbSwitchLib var
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchIMappingsTrData = $HOME.'/.vim/bundle/vim-xkbswitch/xkbswitch.tr'
+let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.so'
+let g:XkbSwitchAssistNKeymap = 1    " for commands r and f
+let g:XkbSwitchAssistSKeymap = 1    " for search lines
+
 "colorscheme settings
 set t_Co=256
 syntax enable
@@ -29,8 +38,8 @@ colorscheme lucius
 LuciusDark
 
 set keymap=russian-jcukenwin " подключение встроенной русской раскладки
-set iminsert=0 " русская расскладка по умолчанию
-set imsearch=0 " русская расскладка при поиске по умолчанию
+set iminsert=0
+set imsearch=0
 
 set number " нумерация
 set cursorline "подсветка редактируемой строчки
